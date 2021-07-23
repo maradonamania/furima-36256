@@ -29,6 +29,7 @@
 | user               | references | null: false, foreign_key: true |
 | postage_id         | integer    | null: false                    |
 | day_to_ship_id     | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 
 - belongs_to :user
 - has_one :order
@@ -36,6 +37,7 @@
 - belongs_to_active_hash :category
 - belongs_to_active_hash :days_to_ship
 - belongs_to_active_hash :postage
+- belongs_to_active_hash :prefecture
 
 # ordersテーブル
 
