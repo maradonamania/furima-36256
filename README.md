@@ -23,12 +23,12 @@
 | ------------------ | -----------| -------------------------------|
 | item_name          | string     | null: false                    |
 | description        | text       | null: false                    |
-| category_id        | integer    | null: false, foreign_key: true |
-| condition_id       | integer    | null: false, foreign_key: true |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
-| postage_id         | integer    | null: false,foreign_key: true  |
-| day_to_ship_id     | integer    | null: false, foreign_key: true |
+| postage_id         | integer    | null: false                    |
+| day_to_ship_id     | integer    | null: false                    |
 
 - belongs_to :user
 - has_one :order
@@ -60,7 +60,7 @@
 | city               | string     | null: false                    |
 | house_number       | string     | null: false                    |
 | building_name      | string     |                                |
-| phone_number       | string     | null: false,                   |
+| phone_number       | string     | null: false                    |
 
 
 ## association
