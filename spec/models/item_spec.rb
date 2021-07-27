@@ -32,8 +32,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
+      it 'カテゴリーでidが0を選択していると保存できないこと' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
       it '商品の状態の情報が未選択だと保存できないこと' do
         @item.condition_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
+      end
+      it '商品の状態の情報でidが0を選択していると保存できないこと' do
+        @item.condition_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
@@ -42,13 +52,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
+      it '配送料の負担の情報でidが0を選択していると保存できないこと' do
+        @item.postage_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Postage can't be blank")
+      end
       it '配送元の地域の情報が未選択だと保存できないこと' do
         @item.prefecture_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it '配送元の地域の情報でidが0を選択していると保存できないこと' do
+        @item.prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it '発送までの日数の情報が未選択だと保存できないこと' do
         @item.day_to_ship_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day to ship can't be blank")
+      end
+      it '発送までの日数の情報でidが0を選択していると保存できないこと' do
+        @item.day_to_ship_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Day to ship can't be blank")
       end
@@ -71,6 +96,17 @@ RSpec.describe Item, type: :model do
         @item.price = "３０００"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '商品価格が半角英数字混合では出品できない' do
+        @item.price = "1000yen"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it '商品価格が半角英字のみでは出品できない
+      ' do
+      @item.price = "senyen"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end
