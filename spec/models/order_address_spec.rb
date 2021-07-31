@@ -67,18 +67,23 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("House number can't be blank")
       end
+      it '電話番号が英数混合では登録できないこと' do
+        @order_address.phone_number = "1a2b3c4d5f6"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
       it 'phone_numberが10桁以下だと保存されない' do
-        @order_address.phone_number = 123456789
+        @order_address.phone_number = "123456789"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberが12桁以上だと保存されない' do
-        @order_address.phone_number = 123456789101
+        @order_address.phone_number = "123456789101"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberにハイフンが含まれると保存されない' do
-        @order_address.phone_number = 1234-567890
+        @order_address.phone_number = "1234-567890"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end

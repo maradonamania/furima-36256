@@ -21,11 +21,11 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order_address).permit(:prefecture_id,:postal_code,:city,:house_number,:phone_number,:building_name,:pric).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
+    params.require(:order_address).permit(:prefecture_id,:postal_code,:city,:house_number,:phone_number,:building_name).merge(user_id: current_user.id,item_id: params[:item_id],token: params[:token])
   end
 
   def move_to_index
-    if @item.user_id  == current_user.id || @item.orders.present?
+    if @item.user_id  == current_user.id || @item.order.present?
       redirect_to root_path
     end
   end
