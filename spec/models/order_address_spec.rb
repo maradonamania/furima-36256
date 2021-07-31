@@ -3,10 +3,16 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe 'オーダーの保存' do
     before do
-      @order_address = FactoryBot.build(:order_address)
+      @user = FactoryBot.build(:user)
+      @item = FactoryBot.build(:item)
+      @order_address = FactoryBot.build(:order_address,user_id: @user.id,item_id: @item.id)
     end
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@order_address).to be_valid
+      end
+      it '建物名が空でも購入できること' do
+        @order_address.building_name = ""
         expect(@order_address).to be_valid
       end
     end
@@ -75,10 +81,6 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = "１２３４５６７８９０"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
-      end
-      it '' do
-      end
-      it '' do
       end
     end
   end
