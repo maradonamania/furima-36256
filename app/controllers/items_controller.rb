@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update, :destory]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy,:update]
 
   def index
@@ -46,12 +46,13 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id == @item.user_id
+    unless current_user.id == @item.user_id && @item.order.blank?
       redirect_to root_path 
     end
   end
 
   def set_item
+    binding.pry
     @item = Item.find(params[:id])
   end
 end
