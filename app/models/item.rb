@@ -15,8 +15,8 @@ class Item < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
     validates :image
   end
-  with_options numericality: { other_than: 0, message: "can't be blank" } do
-    validates :category_id
+  with_options numericality: { other_than: 0, message: "を入力してください" } do
+    validates :category_id 
     validates :condition_id
     validates :postage_id
     validates :prefecture_id
