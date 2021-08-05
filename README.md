@@ -16,6 +16,7 @@
 ## association
 - has_many :items
 - has_many :orders
+- has_many :comments
 
 ## itemsテーブル
 
@@ -38,6 +39,7 @@
 - belongs_to_active_hash :days_to_ship
 - belongs_to_active_hash :postage
 - belongs_to_active_hash :prefecture
+- has_many :comments
 
 # ordersテーブル
 
@@ -69,3 +71,15 @@
 
 - belongs_to :order
 - belongs_to_active_hash :prefecture
+
+# commentsテーブル
+| Column             | Type        | Options                        |
+| ------------------ | ------------| -------------------------------|
+| text               | text        | null: false                    |
+| user_id            | references  | null: false, foreign_key: true |
+| item_id            | references  | null: false, foreign_key: true |
+
+## association
+
+- belongs_to :user
+- belongs_to :item
