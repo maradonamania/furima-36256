@@ -205,3 +205,8 @@
   font-weight: bold;
   font-size: 23px;
 }
+#comments{
+  overflow: scroll;
+  height: 200px;
+  width:  400px;
+}
